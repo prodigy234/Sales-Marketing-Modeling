@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from docx import Document
+from io import BytesIO
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.cluster import KMeans
@@ -23,7 +25,7 @@ df = load_data()
 
 # Sidebar
 st.sidebar.title("📊 Navigation")
-section = st.sidebar.radio("Go to", ["Dataset Overview", "Exploratory Analysis", "Customer Segmentation", "Churn Prediction", "Feature Insights"])
+section = st.sidebar.radio("Go to", ["Dataset Overview", "Exploratory Analysis", "Customer Segmentation", "Churn Prediction", "Feature Insights", "Download Report"])
 
 # Dataset Overview
 if section == "Dataset Overview":
@@ -155,3 +157,66 @@ elif section == "Feature Insights":
         st.pyplot(fig)
     except Exception as e:
         st.error(f"Feature insight computation failed: {e}")
+
+## Download Report
+
+# Function to generate report
+def generate_word_report():
+    doc = Document()
+    doc.add_heading("Supermarket Sales Analytics Report", 0)
+
+    doc.add_heading("1. Customer Demographics & Behavior", level=1)
+    doc.add_paragraph("""\
+• Gender Distribution: Female customers slightly outnumber males.  
+• Total Purchase by Gender: Females tend to spend more per transaction.  
+• Sales by Product Line: Health and Beauty and Food and Beverages lead in sales.""")
+
+    doc.add_heading("2. Feature Engineering", level=1)
+    doc.add_paragraph("""\
+• Created features from Date: Year, Month, Day.  
+• Encoded categorical variables.  
+• Prepared data for machine learning.""")
+
+    doc.add_heading("3. Customer Segmentation (K-Means Clustering)", level=1)
+    doc.add_paragraph("""\
+• Clusters based on Total Spend, Quantity, and Gross Income.  
+• Cluster 0: Low-value, price-sensitive customers.  
+• Cluster 1: Mid-tier, casual buyers.  
+• Cluster 2: High-value customers; priority for loyalty.  
+• Silhouette Score indicates meaningful segmentation.""")
+
+    doc.add_heading("4. Churn Prediction (Random Forest)", level=1)
+    doc.add_paragraph("""\
+• Customer Type used as churn proxy (Normal vs. Member).  
+• Model achieved high ROC AUC (~0.85–0.90).  
+• Balanced precision and recall.  
+• Can guide marketing and retention campaigns.""")
+
+    doc.add_heading("5. Feature Importance", level=1)
+    doc.add_paragraph("""\
+• Top Features: Total, Gross income, Unit price, Tax, COGS.  
+• Suggests spending behavior drives loyalty/churn.""")
+
+    doc.add_heading("6. Final Recommendations", level=1)
+    doc.add_paragraph("""\
+ Target Cluster 2 customers with exclusive offers — High ROI.  
+ Focus campaigns on Health & Beauty and Food & Beverages — Strong demand.  
+ Offer discounts to Cluster 0 — Price-sensitive group.  
+ Use churn model to prioritize Member retention.  
+ Plan around monthly sales trends — Smart resourcing.""")
+
+    # Save to BytesIO
+    report_stream = BytesIO()
+    doc.save(report_stream)
+    report_stream.seek(0)
+    return report_stream
+
+# Streamlit UI
+st.subheader("📥 Download Word Report Summary")
+report_bytes = generate_word_report()
+st.download_button(
+    label="📄 Download Supermarket Analytics Report",
+    data=report_bytes,
+    file_name="Supermarket_Sales_Analytics_Report.docx",
+    mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+)
