@@ -165,6 +165,26 @@ def generate_word_report():
     doc = Document()
     doc.add_heading("Supermarket Sales Analytics Report", 0)
 
+    doc.add_heading("Key Insights", level=1)
+
+    doc.add_heading("1. Customer Segmentation", level=1)
+    doc.add_paragraph("""\
+• Insight: Customers were segmented into three distinct clusters based on total spending, quantity purchased, and gross income.
+• Cluster 0: Low spenders who may need targeted promotions to increase engagement.
+• Cluster 1: Moderate spenders with steady purchasing habits.
+• Cluster 2: High spenders who contribute significantly to revenue but are fewer in number.
+• Action: Focus retention efforts and personalized marketing campaigns on high spenders (Cluster 2) also there's need to upsell opportunities for moderate spenders (Cluster 1), and finally for the budget customers (Cluster 0), there's need to offer discounts which will immensely spur them up.""")
+    
+    doc.add_heading("2. Sales by Product Line", level=1)
+    doc.add_paragraph("""\
+• Insight: Certain product lines drive higher sales (e.g. Food and beverages, Sports and travel, Electronic accessories ), while others lag.
+• Action: Increase inventory and marketing focus on high-performing product lines. 
+• Evaluate underperforming lines such as Home and lifestyle, Health and beauty, to identify issues, such as low customer interest or insufficient promotion.""")
+    
+
+
+    doc.add_heading("A summarized explanation on it", level=1)
+
     doc.add_heading("1. Customer Demographics & Behavior", level=1)
     doc.add_paragraph("""\
 • Gender Distribution: Female customers slightly outnumber males.  
@@ -220,3 +240,4 @@ st.download_button(
     file_name="Supermarket_Sales_Analytics_Report.docx",
     mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 )
+
