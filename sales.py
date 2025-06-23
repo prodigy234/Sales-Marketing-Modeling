@@ -252,11 +252,11 @@ def generate_word_report():
 
     doc.add_heading("6. Final Recommendations", level=1)
     doc.add_paragraph("""\
- Target Cluster 2 customers with exclusive offers — High ROI.  
- Focus campaigns on Health & Beauty and Food & Beverages — Strong demand.  
- Offer discounts to Cluster 0 — Price-sensitive group.  
- Use churn model to prioritize Member retention.  
- Plan around monthly sales trends — Smart resourcing.""")
+• Target Cluster 2 customers with exclusive offers — High ROI.  
+• Focus campaigns on Health & Beauty and Food & Beverages — Strong demand.  
+• Offer discounts to Cluster 0 — Price-sensitive group.  
+• Use churn model to prioritize Member retention.  
+• Plan around monthly sales trends — Smart resourcing.""")
     
     doc.add_heading("Conclusions", level=1)
 
