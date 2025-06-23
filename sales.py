@@ -158,7 +158,7 @@ elif section == "Feature Insights":
         st.error(f"Feature insight computation failed: {e}")
 
 elif section == "About Developer":
-    st.title("About Developer")
+    st.title("👨‍💻 About Developer")
     st.markdown("# The brain behind this project")
 
     st.image("Gbenga.jpg", width=300)
@@ -200,6 +200,21 @@ def generate_word_report():
 • Evaluate underperforming lines such as Home and lifestyle, Health and beauty, to identify issues, such as low customer interest or insufficient promotion.""")
     
 
+    doc.add_heading("3. Gender-Based Insights", level=1)
+    doc.add_paragraph("""\
+• Insight: Purchasing behavior differs by gender. For example, in this analytics, the female gender group show a higher average purchase value than the male gender.
+• Action: Create gender-specific promotions or campaigns based on these purchasing trends.""")
+    
+    doc.add_heading("4. Churn Prediction (Customer Type Classification)", level=1)
+    doc.add_paragraph("""\
+• Insight: The model successfully predicts customer churn (e.g., normal vs. member) with a high level of accuracy, supported by key drivers such as total spending, frequency of purchases, and product preferences.
+• Action: Develop tailored loyalty programs for customers likely to churn, using these predictive insights to focus on high-risk segments.""")
+    
+    doc.add_heading("5. Feature Importance", level=1)
+    doc.add_paragraph("""\
+• Insight: Features such as total spending, gross income, and product line preference are the most critical drivers of customer behaviour.
+• Action: Use these features to design data-driven strategies, like pricing models and discount allocation.""")
+    
 
     doc.add_heading("A summarized explanation on it", level=1)
 
@@ -242,6 +257,22 @@ def generate_word_report():
  Offer discounts to Cluster 0 — Price-sensitive group.  
  Use churn model to prioritize Member retention.  
  Plan around monthly sales trends — Smart resourcing.""")
+    
+    doc.add_heading("Conclusions", level=1)
+
+    doc.add_heading("For Technical Directors:", level=1)
+    doc.add_paragraph("""\
+• The clustering approach using K-Means showed strong segmentation with a Silhouette Score of 0.464504543594134, validating that the clusters are well-separated.
+• The Random Forest model achieved a high ROC AUC score of 0.518600826703409, indicating reliable predictions for customer churn. This model can be further refined with additional hyperparameter tuning or by integrating external data sources.
+• Feature importance analysis highlights the critical role of spending behaviors in customer retention and segmentation models. Automating the pipeline for customer segmentation and churn prediction can allow for continuous optimization.""")
+
+    doc.add_heading("For Non-Technical Directors:", level=1)
+    doc.add_paragraph("""\
+• Customers can be divided into three groups, and we should prioritize retaining high spenders while encouraging moderate and low spenders to purchase more.
+• Specific product lines generate the majority of sales—focusing promotions and inventory planning on these lines will maximize revenue.
+• Predicting which customers might stop shopping allows us to proactively engage them with loyalty programs or personalized offers.
+• Gender-based insights suggest we could design targeted marketing campaigns that resonate more with specific demographics.
+• Leveraging these insights ensures data-driven decision-making, increasing profitability and customer satisfaction.""")
 
     # Save to BytesIO
     report_stream = BytesIO()
@@ -249,7 +280,7 @@ def generate_word_report():
     report_stream.seek(0)
     return report_stream
 
-# Streamlit UI
+# Streamlit UI•
 st.subheader("📥 Download Word Report Summary")
 report_bytes = generate_word_report()
 st.download_button(
