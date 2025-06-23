@@ -25,7 +25,7 @@ df = load_data()
 
 # Sidebar
 st.sidebar.title("📊 Navigation")
-section = st.sidebar.radio("Go to", ["Dataset Overview", "Exploratory Analysis", "Customer Segmentation", "Churn Prediction", "Feature Insights", "Download Report"])
+section = st.sidebar.radio("Go to", ["Dataset Overview", "Exploratory Analysis", "Customer Segmentation", "Churn Prediction", "Feature Insights", "About Developer" ,"Download Report"])
 
 # Dataset Overview
 if section == "Dataset Overview":
@@ -158,6 +158,25 @@ elif section == "Feature Insights":
     except Exception as e:
         st.error(f"Feature insight computation failed: {e}")
 
+elif section == "About Developer":
+    st.title("About Developer")
+    st.markdown("# The brain behind this project")
+
+    st.image("Gbenga.jpg", width=300)
+    st.markdown("## **Kajola Gbenga**")
+
+    st.markdown(
+        """
+    \U0001F4C7 Certified Data Analyst | Certified Data Scientist | Certified SQL Programmer | Mobile App Developer | AI/ML Engineer
+
+    \U0001F517 [LinkedIn](https://www.linkedin.com/in/kajolagbenga)  
+    \U0001F4DC [View My Certifications & Licences](https://www.datacamp.com/portfolio/kgbenga234)  
+    \U0001F4BB [GitHub](https://github.com/prodigy234)  
+    \U0001F310 [Portfolio](https://kajolagbenga.netlify.app/)  
+    \U0001F4E7 k.gbenga234@gmail.com
+    """
+    )
+
 ## Download Report
 
 # Function to generate report
@@ -240,4 +259,3 @@ st.download_button(
     file_name="Supermarket_Sales_Analytics_Report.docx",
     mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 )
-
